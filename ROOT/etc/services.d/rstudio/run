@@ -3,4 +3,5 @@ export USER=rstudio
 echo "www-frame-origin=${CSP_HOSTS:-none}" >> /etc/rstudio/rserver.conf
 echo "session-default-working-dir=~/work" >> /etc/rstudio/rsession.conf
 echo "session-default-new-project-dir=~/work" >> /etc/rstudio/rsession.conf
+chown rstudio:rstudio /home/rstudio/work
 exec /usr/lib/rstudio-server/bin/rserver  --server-daemonize 0 --auth-none 1 --auth-validate-users 0
