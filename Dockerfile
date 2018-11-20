@@ -1,4 +1,4 @@
-FROM rocker/ropensci:3.4.1
+FROM rocker/geospatial:3.5.1
 
 ADD ROOT /
 RUN chown rstudio:rstudio /home/rstudio -R
