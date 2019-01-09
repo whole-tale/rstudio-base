@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv /bin/bash
 export USER=rstudio
 echo "www-frame-origin=${CSP_HOSTS:-none}" >> /etc/rstudio/rserver.conf
-echo "session-default-working-dir=~/work" >> /etc/rstudio/rsession.conf
-echo "session-default-new-project-dir=~/work" >> /etc/rstudio/rsession.conf
-chown rstudio:rstudio /home/rstudio/work
+echo "session-default-working-dir=/WholeTale/workspace" >> /etc/rstudio/rsession.conf
+echo "session-default-new-project-dir=/WholeTale/workspace" >> /etc/rstudio/rsession.conf
+chown rstudio:rstudio /WholeTale
 exec /usr/lib/rstudio-server/bin/rserver  --server-daemonize 0 --auth-none 1 --auth-validate-users 0
