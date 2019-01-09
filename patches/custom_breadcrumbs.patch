@@ -1,0 +1,71 @@
+diff --git a/src/gwt/src/org/rstudio/core/client/files/filedialog/PathBreadcrumbWidget.java b/src/gwt/src/org/rstudio/core/client/files/filedialog/PathBreadcrumbWidget.java
+index 94f59a5c1a..281d38a3fd 100644
+--- a/src/gwt/src/org/rstudio/core/client/files/filedialog/PathBreadcrumbWidget.java
++++ b/src/gwt/src/org/rstudio/core/client/files/filedialog/PathBreadcrumbWidget.java
+@@ -223,7 +223,7 @@ public class PathBreadcrumbWidget
+       if (isHome)
+          text = "Home";
+       else if (isCloudRoot)
+-         text = "Cloud";
++         text = "WholeTale";
+       else
+          text = item.getName();
+       Widget link = null;
+diff --git a/src/gwt/src/org/rstudio/core/client/files/filedialog/cloudHome.png b/src/gwt/src/org/rstudio/core/client/files/filedialog/cloudHome.png
+index 12ed3c45da..7ecc0a1d41 100644
+Binary files a/src/gwt/src/org/rstudio/core/client/files/filedialog/cloudHome.png and b/src/gwt/src/org/rstudio/core/client/files/filedialog/cloudHome.png differ
+diff --git a/src/gwt/src/org/rstudio/core/client/files/filedialog/cloudHome_2x.png b/src/gwt/src/org/rstudio/core/client/files/filedialog/cloudHome_2x.png
+index 70570f4435..1e1d9452c2 100644
+Binary files a/src/gwt/src/org/rstudio/core/client/files/filedialog/cloudHome_2x.png and b/src/gwt/src/org/rstudio/core/client/files/filedialog/cloudHome_2x.png differ
+diff --git a/src/gwt/src/org/rstudio/studio/client/workbench/views/files/FilesPane.java b/src/gwt/src/org/rstudio/studio/client/workbench/views/files/FilesPane.java
+index 105b086027..98fc8eab3f 100644
+--- a/src/gwt/src/org/rstudio/studio/client/workbench/views/files/FilesPane.java
++++ b/src/gwt/src/org/rstudio/studio/client/workbench/views/files/FilesPane.java
+@@ -288,8 +288,7 @@ public class FilesPane extends WorkbenchPane implements Files.Display
+    @Override 
+    protected Widget createMainWidget()
+    {
+-      filePathToolbar_ = new FilePathToolbar(new DisplayObserverProxy(),
+-            session_.getSessionInfo().getCloudFolderEnabled());
++      filePathToolbar_ = new FilePathToolbar(new DisplayObserverProxy(), true);
+ 
+       // create file list and file progress
+       filesList_ = new FilesList(new DisplayObserverProxy(), fileTypeRegistry_);
+diff --git a/src/gwt/src/org/rstudio/studio/client/workbench/views/files/ui/FilePathToolbar.java b/src/gwt/src/org/rstudio/studio/client/workbench/views/files/ui/FilePathToolbar.java
+index e5e1a6c11e..0c01d72374 100644
+--- a/src/gwt/src/org/rstudio/studio/client/workbench/views/files/ui/FilePathToolbar.java
++++ b/src/gwt/src/org/rstudio/studio/client/workbench/views/files/ui/FilePathToolbar.java
+@@ -73,12 +73,12 @@ public class FilePathToolbar extends Composite
+          if (!cloudFolderEnabled_)
+             return super.parseDir(dirPath);
+ 
+-         // if path starts with /cloud, eliminate the entry for the root folder; enables
+-         // display of "/cloud" as a single breadcrumb, similar to how "Home" is displayed
++         // if path starts with /WholeTale, eliminate the entry for the root folder; enables
++         // display of "/WholeTale" as a single breadcrumb, similar to how "Home" is displayed
+          ArrayList<FileSystemItem> parsedDir = new ArrayList<>(Arrays.asList(super.parseDir(dirPath)));
+          if (parsedDir.size() >= 2)
+          {
+-            if (StringUtil.equals(parsedDir.get(1).getPath(), "/cloud"))
++            if (StringUtil.equals(parsedDir.get(1).getPath(), "/WholeTale"))
+             {
+                parsedDir.remove(0);
+             }
+@@ -90,7 +90,7 @@ public class FilePathToolbar extends Composite
+       public boolean isCloudRoot(FileSystemItem item)
+       {
+          if (cloudFolderEnabled_)
+-            return item.isDirectory() && item.getPath().equals("/cloud");
++            return item.isDirectory() && item.getPath().equals("/WholeTale");
+          else
+             return false;
+       }
+@@ -99,7 +99,7 @@ public class FilePathToolbar extends Composite
+    /**
+     *
+     * @param navigationObserver
+-    * @param cloudFolderEnabled if true, display /cloud folder in similar fashion to Home
++    * @param cloudFolderEnabled if true, display /WholeTale folder in similar fashion to Home
+     */
+    public FilePathToolbar(Files.Display.NavigationObserver navigationObserver, boolean cloudFolderEnabled)
+    {
